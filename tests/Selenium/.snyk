@@ -1,0 +1,26 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:extend:20180424':
+    - request > extend:
+        patched: '2019-06-04T13:42:58.939Z'
+    - selenium-standalone > request > extend:
+        patched: '2019-06-04T13:42:58.939Z'
+  'npm:hoek:20180212':
+    - request > hawk > hoek:
+        patched: '2019-06-04T13:42:58.939Z'
+    - request > hawk > boom > hoek:
+        patched: '2019-06-04T13:42:58.939Z'
+    - request > hawk > sntp > hoek:
+        patched: '2019-06-04T13:42:58.939Z'
+    - request > hawk > cryptiles > boom > hoek:
+        patched: '2019-06-04T13:42:58.939Z'
+  'npm:stringstream:20180511':
+    - request > stringstream:
+        patched: '2019-06-04T13:42:58.939Z'
+    - selenium-standalone > request > stringstream:
+        patched: '2019-06-04T13:42:58.939Z'
+    - webdriverio > request > stringstream:
+        patched: '2019-06-04T13:42:58.939Z'
