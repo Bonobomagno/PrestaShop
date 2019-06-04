@@ -13,6 +13,8 @@ if [ -f /var/www/html/config/settings.inc.php -o -f /var/www/html/app/config/par
   echo "\n* Remove PrestaShop configuraiton files...";
   rm -f /var/www/html/config/settings.inc.php
   rm -f /var/www/html/app/config/parameters.php
+  rm -f /var/www/html/app/config/parameters.yml
+  rm -rf /var/www/html/var/cache/*
 fi
 
 if [ $PS_DEV_MODE -ne 0 ]; then
@@ -69,7 +71,7 @@ if [ $PS_INSTALL_AUTO = 1 ]; then
 
   cd /var/www/html
   echo "\n* Install Dependencies...";
-  /usr/bin/composer install
+  /usr/bin/composer install --no-suggest --ansi --prefer-dist --no-interaction --no-progress --quiet
 
   echo "\n* Install PrestaShop...";
   php /var/www/html/$PS_FOLDER_INSTALL/index_cli.php --domain="$PS_DOMAIN" --db_server=$DB_SERVER:$DB_PORT --db_name="$DB_NAME" --db_user=$DB_USER \

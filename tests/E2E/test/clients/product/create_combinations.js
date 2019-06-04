@@ -14,10 +14,10 @@ class CreateCombinations extends Product {
       .pause(3000)
   }
 
-  getCombinationData(number) {
+  getCombinationData(number, pause = 2000) {
     return this.client
-      .pause(4000)
-      .waitForVisible(AddProductPage.combination_panel.replace('%NUMBER', number), 90000)
+      .pause(pause)
+      .waitForExist(AddProductPage.combination_panel.replace('%NUMBER', number), 90000)
       .then(() => this.client.getAttribute(AddProductPage.combination_panel.replace('%NUMBER', number), 'data'))
       .then((text) => global.combinationId = text);
   }
@@ -53,7 +53,6 @@ class CreateCombinations extends Product {
       .waitForExistAndClick(AddProductPage.back_to_product.replace('%NUMBER', global.combinationId))
       .pause(2000)
   }
-
 }
 
 module.exports = CreateCombinations;

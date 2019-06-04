@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -150,8 +150,10 @@ class AddressFormatCore extends ObjectModel
                 ': ' . $className . ': ' . $fieldName;
             }
 
-            unset($obj);
-            unset($reflect);
+            unset(
+                $obj,
+                $reflect
+            );
         }
 
         return $isValid;
@@ -456,8 +458,10 @@ class AddressFormatCore extends ObjectModel
                     $propertyList[] = $propertyName;
                 }
             }
-            unset($object);
-            unset($reflect);
+            unset(
+                $object,
+                $reflect
+            );
         }
 
         return $propertyList;
@@ -490,8 +494,10 @@ class AddressFormatCore extends ObjectModel
                     }
                 }
             }
-            unset($object);
-            unset($reflect);
+            unset(
+                $object,
+                $reflect
+            );
         }
 
         return $objectList;
@@ -509,7 +515,7 @@ class AddressFormatCore extends ObjectModel
     public static function getOrderedAddressFields($idCountry = 0, $splitAll = false, $cleaned = false)
     {
         $out = array();
-        $fieldSet = explode("\n", AddressFormat::getAddressCountryFormat($idCountry));
+        $fieldSet = explode(PHP_EOL, AddressFormat::getAddressCountryFormat($idCountry));
         foreach ($fieldSet as $fieldItem) {
             if ($splitAll) {
                 if ($cleaned) {
@@ -584,6 +590,9 @@ class AddressFormatCore extends ObjectModel
         if (empty($out)) {
             $out = $this->getFormatDB(Configuration::get('PS_COUNTRY_DEFAULT'));
         }
+        if (Country::isNeedDniByCountryId($idCountry) && false === strpos($out, 'dni')) {
+            $out .= PHP_EOL . 'dni';
+        }
 
         return $out;
     }
@@ -591,7 +600,7 @@ class AddressFormatCore extends ObjectModel
     /**
      * @param int $idCountry
      *
-     * @return false|null|string
+     * @return false|string|null
      *
      * @deprecated 1.7.0
      */
@@ -605,7 +614,7 @@ class AddressFormatCore extends ObjectModel
      *
      * @param int $idCountry Country ID
      *
-     * @return false|null|string Address format
+     * @return false|string|null Address format
      *
      * @since 1.7.0
      */
